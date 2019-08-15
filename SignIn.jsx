@@ -24,6 +24,7 @@ export class SignIn extends Component {
       this.state.username === "priyodas12@gmail.com" &&
       this.state.password === "1234"
     ) {
+      this.props.history.push(`/welcome/${this.state.username}`);
       this.setState({ hasLoginFailed: false, showSuccessMessage: true });
 
       console.log("Successful!", this.state);
