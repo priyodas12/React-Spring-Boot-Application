@@ -5,9 +5,14 @@ export class ListTodoComponent extends Component {
     super(props);
     this.state = {
       todo: [
-        { id: 1, desc: "Learn React!" },
-        { id: 2, desc: "Learn Microservice!" },
-        { id: 3, desc: "Learn Java" }
+        { id: 1, desc: "Learn React!", done: false, deadline: new Date() },
+        {
+          id: 2,
+          desc: "Learn Microservice!",
+          done: false,
+          deadline: new Date()
+        },
+        { id: 3, desc: "Learn Java", done: false, deadline: new Date() }
       ]
     };
   }
@@ -15,22 +20,28 @@ export class ListTodoComponent extends Component {
     return (
       <div>
         <h1>List To Dos:</h1>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Desc</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.todo.map(i => (
+        <div className="container">
+          <table className="table table-striped">
+            <thead>
               <tr>
-                <td>{i.id}</td>
-                <td>{i.desc}</td>
+                <th>Id</th>
+                <th>Desc</th>
+                <th>Is Done</th>
+                <th>Complete Date</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {this.state.todo.map(i => (
+                <tr key={i.id}>
+                  <td>{i.id}</td>
+                  <td>{i.desc}</td>
+                  <td>{i.done.toString()}</td>
+                  <td>{i.deadline.toString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
