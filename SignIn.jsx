@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Authentication from "./Authentication.js";
 
 export class SignIn extends Component {
   constructor(props) {
@@ -24,6 +25,10 @@ export class SignIn extends Component {
       this.state.username === "priyodas12@gmail.com" &&
       this.state.password === "1234"
     ) {
+      Authentication.registerSuccessFullogin(
+        this.state.username,
+        this.state.password
+      );
       this.props.history.push(`/welcome/${this.state.username}`);
       this.setState({ hasLoginFailed: false, showSuccessMessage: true });
 
@@ -32,41 +37,47 @@ export class SignIn extends Component {
       this.setState({ hasLoginFailed: true, showSuccessMessage: false });
       console.log("Failed!!", this.state);
     }
-    e.preventDefault();
   };
 
   render() {
     return (
-      <div className="form-group">
-        {this.state.showSuccessMessage && <div>Login Successful!</div>}
-        {this.state.hasLoginFailed && <div>Invalid Credentails</div>}
-        <form>
-          <label>
-            Username:
+      <div className="md-form ">
+        <h1>Login Here</h1>
+        <div className="container">
+          {this.state.showSuccessMessage && (
+            <div className="alert alert-warning">Login Successful!</div>
+          )}
+          {this.state.hasLoginFailed && <div>Invalid Credentails</div>}
+          <form>
+            <label>Username:</label>
             <input
               type="text"
               name="username"
               value={this.state.username}
               onChange={this.changeInputParamHandler}
             />
-            Password:
+            <br />
+            <br />
+            <label>Password:</label>
             <input
               type="password"
               name="password"
               value={this.state.password}
               onChange={this.changeInputParamHandler}
             />
-          </label>
-          <label>
-            <button
-              type="submit"
-              className="btn btn-primary"
-              onClick={this.submitHandler}
-            >
-              Submit
-            </button>
-          </label>
-        </form>
+            <br />
+            <br />
+            <label>
+              <button
+                type="submit"
+                className="btn btn-outline-success"
+                onClick={this.submitHandler}
+              >
+                Submit
+              </button>
+            </label>
+          </form>
+        </div>
       </div>
     );
   }
